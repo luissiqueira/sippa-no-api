@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.files.storage import default_storage
 from parser import ListSubjectsParser, SubjectParser, StudentParser
-from sippa.settings import AWS_S3_CUSTOM_DOMAIN
+from sippa.settings import BASE_AWS_URL
 
 
 class SIPPAWrapper(object):
@@ -43,7 +43,7 @@ class SIPPAWrapper(object):
                 if chunk:
                     f.write(chunk)
 
-        return 'https://%s/%s' % (AWS_S3_CUSTOM_DOMAIN, local_filename)
+        return '%s/%s' % (BASE_AWS_URL, local_filename)
 
     def start_auth(self):
         """
