@@ -1,0 +1,22 @@
+Django==1.10.2
+wheel==0.24.0
+
+django-environ==0.4.0
+
+requests==2.11.1
+
+lxml==3.6.4
+beautifulsoup4==4.4.0
+
+awscli==1.10.59
+awsebcli==3.8.1
+
+#From green
+django-db-geventpool==1.20.1
+gevent==1.1.1
+gevent-psycopg2==0.0.3
+psycogreen==1.0
+uWSGI==2.0.12
+
+django-storages==1.5.1
+boto==2.42.0
