@@ -9,6 +9,7 @@ pages:
 - Início: index.md
 - API: using.md
 - Tecnologias: tecnologies.md
+- Sobre: about.md
 
 extra:
     version: 1.0
