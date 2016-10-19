@@ -3,6 +3,8 @@
 *.sqlite3
 images/*
 
+api-docs/site/
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/app_versions/*
 # !.elasticbeanstalk/*.cfg.yml

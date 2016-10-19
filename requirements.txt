@@ -20,3 +20,7 @@ uWSGI==2.0.12
 
 django-storages==1.5.1
 boto==2.42.0
+
+msgpack-python==0.4.8
+
+mkdocs==0.15.3
