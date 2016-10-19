@@ -1,2 +1,7 @@
 site_name: SIPPA-NO-API
 theme: readthedocs
+
+pages:
+- Início: index.md
+- API: using.md
+- Tecnologias: tecnologies.md
