@@ -1,7 +1,14 @@
 site_name: SIPPA-NO-API
+site_dir: ../docs
+
+repo_url: https://github.com/luissiqueira/sippa-no-api/
+
 theme: readthedocs
 
 pages:
 - Início: index.md
 - API: using.md
 - Tecnologias: tecnologies.md
+
+extra:
+    version: 1.0
