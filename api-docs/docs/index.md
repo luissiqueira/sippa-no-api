@@ -18,7 +18,7 @@ utilizar um desktop (já que o site não é responsível o suficiente para acess
 a cada vez que eu precisava consultar alguma nota ou baixar algum arquivo que o professor disponibilizou.
 
 A principal intenção da construção dessa API é auxiliar na criação de uma solução baseada em dispositivo móvel
-para que o acesso a essas informações foi realizada de um modo mais simples e mais dentro da realidade
+para que o acesso a essas informações seja realizada de um modo mais simples e mais dentro da realidade
 atual onde a maioria das aplicações que conhecemos dão suporte a esse acesso via smartphones.
 
 # Conhecendo a API
