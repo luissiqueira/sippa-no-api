@@ -69,11 +69,13 @@
             
                 <li class="toctree-l3"><a href="#utilizando-a-api">Utilizando a API</a></li>
                 
+                    <li><a class="toctree-l4" href="#entendendo-o-processo-de-login">Entendendo o processo de login</a></li>
+                
                     <li><a class="toctree-l4" href="#iniciando-um-processo-de-login">Iniciando um processo de login</a></li>
                 
                     <li><a class="toctree-l4" href="#obtendo-informacoes-do-aluno">Obtendo informações do aluno</a></li>
                 
-                    <li><a class="toctree-l4" href="#o-que-e-msgpack">O que é Msgpack?</a></li>
+                    <li><a class="toctree-l4" href="#recebendo-a-resposta-no-formato-messagepack">Recebendo a resposta no formato MessagePack</a></li>
                 
             
             </ul>
@@ -133,12 +135,162 @@
               
                 <h1 id="utilizando-a-api">Utilizando a API</h1>
 <p>Exibir quais são os serviços disponíveis, falar sobre o msgpack e json, exemplificar.</p>
+<h2 id="entendendo-o-processo-de-login">Entendendo o processo de login</h2>
+<p>Para realizar login no <a href="https://sistemas.quixada.ufc.br/apps/sippa/">SIPPA</a>
+é necessário informar quatro campos básicos:</p>
+<ul>
+<li>Matrícula</li>
+<li>Senha</li>
+<li>Tipo de usuário</li>
+<li>Valor para o captcha</li>
+</ul>
+<p>O tipo de usuário nesse caso é fixo pois apenas trataremos de alunos nessa API. Caso deseje
+expandir para outros tipo de usuários será necessário flexibilizar esse argumento também para as
+chamadas da API.</p>
+<p>O valor para o captcha atualmente é informado de forma manual, onde o usuário que irá realizar
+o login na aplicação deverá informar qual o valor presente na imagem a ser exibida (assim como
+acontece no login tradicional via site oficial).</p>
 <h2 id="iniciando-um-processo-de-login">Iniciando um processo de login</h2>
-<p>...</p>
+<p>Para iniciar o processo de login é necessário gerar um identificador de sessão juntamente com
+a url do captcha a ser informado.</p>
+<p><strong><em>Exemplo de requisição</em></strong></p>
+<pre><code class="http">  GET  http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/start-login
+</code></pre>
+
+<p><strong><em>Exemplo de retorno</em></strong></p>
+<pre><code class="json">  {
+    &quot;identifier&quot;: &quot;ABCDE12345&quot;,
+    &quot;captcha_url&quot;: &quot;http://lorempixel.com/200/200&quot;
+  }
+</code></pre>
+
+<ul>
+<li>identifier: Deve ser reenviado na solicitação de informações do usuário juntamente com o valor do captcha.</li>
+<li>captcha_url: Link da imagem de captcha associada ao identificador de sessão.</li>
+</ul>
 <h2 id="obtendo-informacoes-do-aluno">Obtendo informações do aluno</h2>
-<p>...</p>
-<h2 id="o-que-e-msgpack">O que é Msgpack?</h2>
-<p>...</p>
+<p>Em posse do identificador de sessão e do valor do captcha a ele associado, é chegada a vez de informar os dados
+do aluno (matrícula e senha) e receber as informações atuais.</p>
+<p><strong><em>Exemplo de requisição</em></strong></p>
+<pre><code class="http">  POST          http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/process-login
+  Content-Type  application/x-www-form-urlencoded
+
+  login=&quot;0330000&quot;
+  password=&quot;123456&quot;
+  session=&quot;ABCDE12345&quot;
+  captcha_value=&quot;q1w2&quot;
+
+</code></pre>
+
+<p><strong><em>Exemplo de retorno</em></strong></p>
+<pre><code class="json">  {
+    &quot;student&quot;: {
+      &quot;name&quot;: &quot;Nome do aluno&quot;,
+      &quot;registration&quot;: &quot;0330000&quot;
+    },
+    &quot;subjects&quot;: [
+      {
+        &quot;code&quot;: &quot;qxd0000&quot;,
+        &quot;class_identifier&quot;: &quot;123456&quot;,
+        &quot;name&quot;: &quot;Disciplina 1&quot;,
+        &quot;average&quot;: null,
+        &quot;teacher&quot;: {
+          &quot;name&quot;: &quot;Nome do professor&quot;,
+          &quot;email&quot;: &quot;email@email.com&quot;,
+          &quot;avatar_url&quot;: &quot;http://lorempixel.com/200/200&quot;
+        },
+        &quot;notices&quot;: [
+          {
+            &quot;order&quot;: 1,
+            &quot;date&quot;: &quot;dd/mm/YYYY&quot;,
+            &quot;text&quot;: &quot;Notícia&quot;
+          }
+        ],
+        &quot;lesson_plans&quot;: [
+          {
+            &quot;lesson&quot;: 1,
+            &quot;description&quot;: &quot;Exemplo de aula&quot;,
+            &quot;planned_description&quot;: &quot;Exemplo de aula&quot;,
+            &quot;date&quot;: &quot;dd/mm/YYYY&quot;,
+            &quot;presence_hours&quot;: &quot;0&quot;
+          }
+        ],
+        &quot;frequency&quot;: {
+          &quot;text&quot;: &quot;100% de Frequência; 0 Presenças em Horas; 0 Faltas em Horas&quot;,
+          &quot;presence_hours&quot;: 0,
+          &quot;absence_hours&quot;: 0,
+          &quot;max_hours&quot;: 0
+        },
+        &quot;exams&quot;: [
+          {
+            &quot;order&quot;: 1,
+            &quot;short_description&quot;: &quot;AP1&quot;,
+            &quot;description&quot;: &quot;Primeira Avaliação Parcial&quot;,
+            &quot;weight&quot;: &quot;1.0&quot;,
+            &quot;value&quot;: null
+          }
+        ],
+        &quot;files&quot;: [
+          {
+            &quot;description&quot;: &quot;Lista_de_exercicios.pdf&quot;,
+            &quot;date&quot;: &quot;dd/mm/YYYY&quot;,
+            &quot;order&quot;: 1
+          }
+        ],
+        &quot;second_call_options&quot;: [
+          {
+            &quot;order&quot;: 1,
+            &quot;description&quot;: &quot;AP1&quot;,
+            &quot;code&quot;: &quot;1234&quot;
+          }
+        ],
+        &quot;second_call_history&quot;: [
+          {
+            &quot;order&quot;: 1,
+            &quot;exam_description&quot;: &quot;AP1&quot;,
+            &quot;exam_code&quot;: &quot;1234&quot;,
+            &quot;motive&quot;: &quot;Justificativa da solicitação&quot;,
+            &quot;date&quot;: &quot;dd/mm/YYYY&quot;
+          }
+        ],
+        &quot;calendar&quot;: {
+          &quot;start_period&quot;: &quot;dd/mm/YYYY&quot;,
+          &quot;end_period&quot;: &quot;dd/mm/YYYY&quot;,
+          &quot;start_final_exams&quot;: &quot;dd/mm/YYYY&quot;,
+          &quot;end_final_exams&quot;: &quot;dd/mm/YYYY&quot;,
+          &quot;holidays&quot;: [
+            {
+              &quot;order&quot;: 1,
+              &quot;date&quot;: &quot;dd/mm/YYYY&quot;,
+              &quot;description&quot;: &quot;Feriado nacional&quot;,
+              &quot;kind&quot;: &quot;Feriado Nacional&quot;
+            }
+          ]
+        },
+        &quot;homework&quot;: [
+          {
+            &quot;order&quot;: 1,
+            &quot;file&quot;: null,
+            &quot;description&quot;: &quot;Trabalho&quot;,
+            &quot;max_date&quot;: &quot;dd/mm/YYYY&quot;
+          }
+        ]
+      }
+    ]
+  }
+</code></pre>
+
+<h2 id="recebendo-a-resposta-no-formato-messagepack">Recebendo a resposta no formato MessagePack</h2>
+<p>Definição breve sobre o MessagePack segundo o site oficial: <em>"It's like JSON.
+But fast and small."</em></p>
+<p>Para os serviços envolvidos no processo de obtenção de dados do usuário, é possível receber a resposta no formato
+do <a href="https://msgpack.org">MessagePack</a>.</p>
+<p>Para isso é preciso apenas enviar um query parameter na URL chamado <em>format</em> com o valor <em>msgpack</em>.</p>
+<p><strong><em>Exemplo de requição requisitando MessagePack como padrão de resposta</em></strong></p>
+<pre><code class="http">  GET  http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/start_login?format=msgpack
+</code></pre>
+
+<p>Para entender mais, acesse o <a href="https://msgpack.org">site oficial</a> do projeto.</p>
               
             </div>
           </div>

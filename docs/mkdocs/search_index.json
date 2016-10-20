@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "SIPPA-NO-API\n\n\nBem vindo \u00e0 documenta\u00e7\u00e3o do SIPPA-NO-API.\n\n\nSIPPA-NO-API \u00e9 uma API n\u00e3o oficial do sistema \nSIPPA\n\nutilizado pela UFC-Quixad\u00e1.\n\n\nSIPPA\n\n\nDescrever rapidamente o sippa.\n\n\nMotivacional\n\n\nFalar sobre os problemas encontrados e o que levou a criar a API.", 
+            "text": "SIPPA-NO-API\n\n\nBem vindo \u00e0 documenta\u00e7\u00e3o do SIPPA-NO-API.\n\n\nSIPPA-NO-API \u00e9 uma API n\u00e3o oficial do sistema \nSIPPA\n\nutilizado pela UFC-Quixad\u00e1.\n\n\nSIPPA\n\n\nO SIPPA \u00e9 uma aplica\u00e7\u00e3o constru\u00edda pela Universidade Federal do Cear\u00e1 no campus de Quixad\u00e1 para realizar\na ger\u00eancia de turmas e dar suporte durante as ofertas das disciplinas com acompanhamento de trabalhos, materiais\nde apoio, postagem de notas, envio de not\u00edcias e relat\u00f3rio de frequ\u00eancia.\n\n\nMotivacional para a API\n\n\nUm dos principais motivos que me levou a construir essa API foi a burocracia de ter que\nutilizar um desktop (j\u00e1 que o site n\u00e3o \u00e9 respons\u00edvel o suficiente para acesso direto no celular)\na cada vez que eu precisava consultar alguma nota ou baixar algum arquivo que o professor disponibilizou.\n\n\nA principal inten\u00e7\u00e3o da constru\u00e7\u00e3o dessa API \u00e9 auxiliar na cria\u00e7\u00e3o de uma solu\u00e7\u00e3o baseada em dispositivo m\u00f3vel\npara que o acesso a essas informa\u00e7\u00f5es foi realizada de um modo mais simples e mais dentro da realidade\natual onde a maioria das aplica\u00e7\u00f5es que conhecemos d\u00e3o suporte a esse acesso via smartphones.\n\n\nConhecendo a API\n\n\nPara mais detalhes sobre o uso da API \nacesse aqui\n.", 
             "title": "In\u00edcio"
         }, 
         {
@@ -12,17 +12,22 @@
         }, 
         {
             "location": "/#sippa", 
-            "text": "Descrever rapidamente o sippa.", 
+            "text": "O SIPPA \u00e9 uma aplica\u00e7\u00e3o constru\u00edda pela Universidade Federal do Cear\u00e1 no campus de Quixad\u00e1 para realizar\na ger\u00eancia de turmas e dar suporte durante as ofertas das disciplinas com acompanhamento de trabalhos, materiais\nde apoio, postagem de notas, envio de not\u00edcias e relat\u00f3rio de frequ\u00eancia.", 
             "title": "SIPPA"
         }, 
         {
-            "location": "/#motivacional", 
-            "text": "Falar sobre os problemas encontrados e o que levou a criar a API.", 
-            "title": "Motivacional"
+            "location": "/#motivacional-para-a-api", 
+            "text": "Um dos principais motivos que me levou a construir essa API foi a burocracia de ter que\nutilizar um desktop (j\u00e1 que o site n\u00e3o \u00e9 respons\u00edvel o suficiente para acesso direto no celular)\na cada vez que eu precisava consultar alguma nota ou baixar algum arquivo que o professor disponibilizou.  A principal inten\u00e7\u00e3o da constru\u00e7\u00e3o dessa API \u00e9 auxiliar na cria\u00e7\u00e3o de uma solu\u00e7\u00e3o baseada em dispositivo m\u00f3vel\npara que o acesso a essas informa\u00e7\u00f5es foi realizada de um modo mais simples e mais dentro da realidade\natual onde a maioria das aplica\u00e7\u00f5es que conhecemos d\u00e3o suporte a esse acesso via smartphones.", 
+            "title": "Motivacional para a API"
+        }, 
+        {
+            "location": "/#conhecendo-a-api", 
+            "text": "Para mais detalhes sobre o uso da API  acesse aqui .", 
+            "title": "Conhecendo a API"
         }, 
         {
             "location": "/using/", 
-            "text": "Utilizando a API\n\n\nExibir quais s\u00e3o os servi\u00e7os dispon\u00edveis, falar sobre o msgpack e json, exemplificar.\n\n\nIniciando um processo de login\n\n\n...\n\n\nObtendo informa\u00e7\u00f5es do aluno\n\n\n...\n\n\nO que \u00e9 Msgpack?\n\n\n...", 
+            "text": "Utilizando a API\n\n\nExibir quais s\u00e3o os servi\u00e7os dispon\u00edveis, falar sobre o msgpack e json, exemplificar.\n\n\nEntendendo o processo de login\n\n\nPara realizar login no \nSIPPA\n\n\u00e9 necess\u00e1rio informar quatro campos b\u00e1sicos:\n\n\n\n\nMatr\u00edcula\n\n\nSenha\n\n\nTipo de usu\u00e1rio\n\n\nValor para o captcha\n\n\n\n\nO tipo de usu\u00e1rio nesse caso \u00e9 fixo pois apenas trataremos de alunos nessa API. Caso deseje\nexpandir para outros tipo de usu\u00e1rios ser\u00e1 necess\u00e1rio flexibilizar esse argumento tamb\u00e9m para as\nchamadas da API.\n\n\nO valor para o captcha atualmente \u00e9 informado de forma manual, onde o usu\u00e1rio que ir\u00e1 realizar\no login na aplica\u00e7\u00e3o dever\u00e1 informar qual o valor presente na imagem a ser exibida (assim como\nacontece no login tradicional via site oficial).\n\n\nIniciando um processo de login\n\n\nPara iniciar o processo de login \u00e9 necess\u00e1rio gerar um identificador de sess\u00e3o juntamente com\na url do captcha a ser informado.\n\n\nExemplo de requisi\u00e7\u00e3o\n\n\n  GET  http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/start-login\n\n\n\n\nExemplo de retorno\n\n\n  {\n    \nidentifier\n: \nABCDE12345\n,\n    \ncaptcha_url\n: \nhttp://lorempixel.com/200/200\n\n  }\n\n\n\n\n\n\nidentifier: Deve ser reenviado na solicita\u00e7\u00e3o de informa\u00e7\u00f5es do usu\u00e1rio juntamente com o valor do captcha.\n\n\ncaptcha_url: Link da imagem de captcha associada ao identificador de sess\u00e3o.\n\n\n\n\nObtendo informa\u00e7\u00f5es do aluno\n\n\nEm posse do identificador de sess\u00e3o e do valor do captcha a ele associado, \u00e9 chegada a vez de informar os dados\ndo aluno (matr\u00edcula e senha) e receber as informa\u00e7\u00f5es atuais.\n\n\nExemplo de requisi\u00e7\u00e3o\n\n\n  POST          http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/process-login\n  Content-Type  application/x-www-form-urlencoded\n\n  login=\n0330000\n\n  password=\n123456\n\n  session=\nABCDE12345\n\n  captcha_value=\nq1w2\n\n\n\n\n\n\nExemplo de retorno\n\n\n  {\n    \nstudent\n: {\n      \nname\n: \nNome do aluno\n,\n      \nregistration\n: \n0330000\n\n    },\n    \nsubjects\n: [\n      {\n        \ncode\n: \nqxd0000\n,\n        \nclass_identifier\n: \n123456\n,\n        \nname\n: \nDisciplina 1\n,\n        \naverage\n: null,\n        \nteacher\n: {\n          \nname\n: \nNome do professor\n,\n          \nemail\n: \nemail@email.com\n,\n          \navatar_url\n: \nhttp://lorempixel.com/200/200\n\n        },\n        \nnotices\n: [\n          {\n            \norder\n: 1,\n            \ndate\n: \ndd/mm/YYYY\n,\n            \ntext\n: \nNot\u00edcia\n\n          }\n        ],\n        \nlesson_plans\n: [\n          {\n            \nlesson\n: 1,\n            \ndescription\n: \nExemplo de aula\n,\n            \nplanned_description\n: \nExemplo de aula\n,\n            \ndate\n: \ndd/mm/YYYY\n,\n            \npresence_hours\n: \n0\n\n          }\n        ],\n        \nfrequency\n: {\n          \ntext\n: \n100% de Frequ\u00eancia; 0 Presen\u00e7as em Horas; 0 Faltas em Horas\n,\n          \npresence_hours\n: 0,\n          \nabsence_hours\n: 0,\n          \nmax_hours\n: 0\n        },\n        \nexams\n: [\n          {\n            \norder\n: 1,\n            \nshort_description\n: \nAP1\n,\n            \ndescription\n: \nPrimeira Avalia\u00e7\u00e3o Parcial\n,\n            \nweight\n: \n1.0\n,\n            \nvalue\n: null\n          }\n        ],\n        \nfiles\n: [\n          {\n            \ndescription\n: \nLista_de_exercicios.pdf\n,\n            \ndate\n: \ndd/mm/YYYY\n,\n            \norder\n: 1\n          }\n        ],\n        \nsecond_call_options\n: [\n          {\n            \norder\n: 1,\n            \ndescription\n: \nAP1\n,\n            \ncode\n: \n1234\n\n          }\n        ],\n        \nsecond_call_history\n: [\n          {\n            \norder\n: 1,\n            \nexam_description\n: \nAP1\n,\n            \nexam_code\n: \n1234\n,\n            \nmotive\n: \nJustificativa da solicita\u00e7\u00e3o\n,\n            \ndate\n: \ndd/mm/YYYY\n\n          }\n        ],\n        \ncalendar\n: {\n          \nstart_period\n: \ndd/mm/YYYY\n,\n          \nend_period\n: \ndd/mm/YYYY\n,\n          \nstart_final_exams\n: \ndd/mm/YYYY\n,\n          \nend_final_exams\n: \ndd/mm/YYYY\n,\n          \nholidays\n: [\n            {\n              \norder\n: 1,\n              \ndate\n: \ndd/mm/YYYY\n,\n              \ndescription\n: \nFeriado nacional\n,\n              \nkind\n: \nFeriado Nacional\n\n            }\n          ]\n        },\n        \nhomework\n: [\n          {\n            \norder\n: 1,\n            \nfile\n: null,\n            \ndescription\n: \nTrabalho\n,\n            \nmax_date\n: \ndd/mm/YYYY\n\n          }\n        ]\n      }\n    ]\n  }\n\n\n\n\nRecebendo a resposta no formato MessagePack\n\n\nDefini\u00e7\u00e3o breve sobre o MessagePack segundo o site oficial: \n\"It's like JSON.\nBut fast and small.\"\n\n\nPara os servi\u00e7os envolvidos no processo de obten\u00e7\u00e3o de dados do usu\u00e1rio, \u00e9 poss\u00edvel receber a resposta no formato\ndo \nMessagePack\n.\n\n\nPara isso \u00e9 preciso apenas enviar um query parameter na URL chamado \nformat\n com o valor \nmsgpack\n.\n\n\nExemplo de requi\u00e7\u00e3o requisitando MessagePack como padr\u00e3o de resposta\n\n\n  GET  http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/start_login?format=msgpack\n\n\n\n\nPara entender mais, acesse o \nsite oficial\n do projeto.", 
             "title": "API"
         }, 
         {
@@ -31,79 +36,84 @@
             "title": "Utilizando a API"
         }, 
         {
+            "location": "/using/#entendendo-o-processo-de-login", 
+            "text": "Para realizar login no  SIPPA \n\u00e9 necess\u00e1rio informar quatro campos b\u00e1sicos:   Matr\u00edcula  Senha  Tipo de usu\u00e1rio  Valor para o captcha   O tipo de usu\u00e1rio nesse caso \u00e9 fixo pois apenas trataremos de alunos nessa API. Caso deseje\nexpandir para outros tipo de usu\u00e1rios ser\u00e1 necess\u00e1rio flexibilizar esse argumento tamb\u00e9m para as\nchamadas da API.  O valor para o captcha atualmente \u00e9 informado de forma manual, onde o usu\u00e1rio que ir\u00e1 realizar\no login na aplica\u00e7\u00e3o dever\u00e1 informar qual o valor presente na imagem a ser exibida (assim como\nacontece no login tradicional via site oficial).", 
+            "title": "Entendendo o processo de login"
+        }, 
+        {
             "location": "/using/#iniciando-um-processo-de-login", 
-            "text": "...", 
+            "text": "Para iniciar o processo de login \u00e9 necess\u00e1rio gerar um identificador de sess\u00e3o juntamente com\na url do captcha a ser informado.  Exemplo de requisi\u00e7\u00e3o    GET  http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/start-login  Exemplo de retorno    {\n     identifier :  ABCDE12345 ,\n     captcha_url :  http://lorempixel.com/200/200 \n  }   identifier: Deve ser reenviado na solicita\u00e7\u00e3o de informa\u00e7\u00f5es do usu\u00e1rio juntamente com o valor do captcha.  captcha_url: Link da imagem de captcha associada ao identificador de sess\u00e3o.", 
             "title": "Iniciando um processo de login"
         }, 
         {
             "location": "/using/#obtendo-informacoes-do-aluno", 
-            "text": "...", 
+            "text": "Em posse do identificador de sess\u00e3o e do valor do captcha a ele associado, \u00e9 chegada a vez de informar os dados\ndo aluno (matr\u00edcula e senha) e receber as informa\u00e7\u00f5es atuais.  Exemplo de requisi\u00e7\u00e3o    POST          http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/process-login\n  Content-Type  application/x-www-form-urlencoded\n\n  login= 0330000 \n  password= 123456 \n  session= ABCDE12345 \n  captcha_value= q1w2   Exemplo de retorno    {\n     student : {\n       name :  Nome do aluno ,\n       registration :  0330000 \n    },\n     subjects : [\n      {\n         code :  qxd0000 ,\n         class_identifier :  123456 ,\n         name :  Disciplina 1 ,\n         average : null,\n         teacher : {\n           name :  Nome do professor ,\n           email :  email@email.com ,\n           avatar_url :  http://lorempixel.com/200/200 \n        },\n         notices : [\n          {\n             order : 1,\n             date :  dd/mm/YYYY ,\n             text :  Not\u00edcia \n          }\n        ],\n         lesson_plans : [\n          {\n             lesson : 1,\n             description :  Exemplo de aula ,\n             planned_description :  Exemplo de aula ,\n             date :  dd/mm/YYYY ,\n             presence_hours :  0 \n          }\n        ],\n         frequency : {\n           text :  100% de Frequ\u00eancia; 0 Presen\u00e7as em Horas; 0 Faltas em Horas ,\n           presence_hours : 0,\n           absence_hours : 0,\n           max_hours : 0\n        },\n         exams : [\n          {\n             order : 1,\n             short_description :  AP1 ,\n             description :  Primeira Avalia\u00e7\u00e3o Parcial ,\n             weight :  1.0 ,\n             value : null\n          }\n        ],\n         files : [\n          {\n             description :  Lista_de_exercicios.pdf ,\n             date :  dd/mm/YYYY ,\n             order : 1\n          }\n        ],\n         second_call_options : [\n          {\n             order : 1,\n             description :  AP1 ,\n             code :  1234 \n          }\n        ],\n         second_call_history : [\n          {\n             order : 1,\n             exam_description :  AP1 ,\n             exam_code :  1234 ,\n             motive :  Justificativa da solicita\u00e7\u00e3o ,\n             date :  dd/mm/YYYY \n          }\n        ],\n         calendar : {\n           start_period :  dd/mm/YYYY ,\n           end_period :  dd/mm/YYYY ,\n           start_final_exams :  dd/mm/YYYY ,\n           end_final_exams :  dd/mm/YYYY ,\n           holidays : [\n            {\n               order : 1,\n               date :  dd/mm/YYYY ,\n               description :  Feriado nacional ,\n               kind :  Feriado Nacional \n            }\n          ]\n        },\n         homework : [\n          {\n             order : 1,\n             file : null,\n             description :  Trabalho ,\n             max_date :  dd/mm/YYYY \n          }\n        ]\n      }\n    ]\n  }", 
             "title": "Obtendo informa\u00e7\u00f5es do aluno"
         }, 
         {
-            "location": "/using/#o-que-e-msgpack", 
-            "text": "...", 
-            "title": "O que \u00e9 Msgpack?"
+            "location": "/using/#recebendo-a-resposta-no-formato-messagepack", 
+            "text": "Defini\u00e7\u00e3o breve sobre o MessagePack segundo o site oficial:  \"It's like JSON.\nBut fast and small.\"  Para os servi\u00e7os envolvidos no processo de obten\u00e7\u00e3o de dados do usu\u00e1rio, \u00e9 poss\u00edvel receber a resposta no formato\ndo  MessagePack .  Para isso \u00e9 preciso apenas enviar um query parameter na URL chamado  format  com o valor  msgpack .  Exemplo de requi\u00e7\u00e3o requisitando MessagePack como padr\u00e3o de resposta    GET  http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/start_login?format=msgpack  Para entender mais, acesse o  site oficial  do projeto.", 
+            "title": "Recebendo a resposta no formato MessagePack"
         }, 
         {
             "location": "/tecnologies/", 
-            "text": "APIs de terceiros\n\n\nSegue a lista de m\u00f3dulos de terceiros utilizados no projeto.\n\n\nDjango\n\n\n...\n\n\nDjango-environ\n\n\n...\n\n\nRequests\n\n\n...\n\n\nBeautifulSoup 4\n\n\n...\n\n\nMsgpack\n\n\n...\n\n\nMkDocs\n\n\n...\n\n\ngevent\n\n\n...\n\n\nDocker\n\n\n...\n\n\nAWS\n\n\n...\n\n\nDjango-Storages\n\n\n...", 
+            "text": "APIs de terceiros\n\n\nSegue a lista de m\u00f3dulos e servi\u00e7os de terceiros utilizados no projeto.\n\n\nDjango\n\n\n\n\n\"Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\"\n\n\nhttps://www.djangoproject.com\n\n\n\n\nDjango-environ\n\n\n\n\n\"Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application.\"\n\n\nhttps://django-environ.readthedocs.io\n\n\n\n\nRequests\n\n\n\n\n\"Requests is the only Non-GMO HTTP library for Python, safe for human consumption.\"\n\n\nhttp://docs.python-requests.org\n\n\n\n\nBeautifulSoup 4\n\n\n\n\n\"Beautiful Soup is a Python library for pulling data out of HTML and XML files.\"\n\n\nhttps://www.crummy.com/software/BeautifulSoup/bs4/doc/\n\n\n\n\nMessagePack\n\n\n\n\n\"MessagePack is an efficient binary serialization format.\"\n\n\nhttps://msgpack.org\n\n\n\n\nMkDocs\n\n\n\n\n\"MkDocs is a fast, simple and downright gorgeous static site generator\nthat's geared towards building project documentation.\"\n\n\nhttp://www.mkdocs.org\n\n\n\n\ngevent\n\n\n\n\n\"gevent is a coroutine-based Python networking library that uses\ngreenlet to provide a high-level synchronous API on top of the libev event loop.\"\n\n\nhttp://www.gevent.org/\n\n\n\n\nDocker\n\n\n\n\n\"Docker is an open platform for developers and sysadmins to build, ship, and run\ndistributed applications, whether on laptops, data center VMs, or the cloud.\"\n\n\nhttps://www.docker.com/\n\n\n\n\nAWS\n\n\n\n\n\"AWS \u00e9 uma cole\u00e7\u00e3o de servi\u00e7os de computa\u00e7\u00e3o em nuvem ou servi\u00e7os\nweb, que formam uma plataforma de computa\u00e7\u00e3o na nuvem.\"\n\n\nhttps://aws.amazon.com/pt/\n\n\n\n\ndjango-storages\n\n\n\n\n\"django-storages is a collection of custom storage backends for Django.\"\n\n\nhttps://django-storages.readthedocs.io", 
             "title": "Tecnologias"
         }, 
         {
             "location": "/tecnologies/#apis-de-terceiros", 
-            "text": "Segue a lista de m\u00f3dulos de terceiros utilizados no projeto.", 
+            "text": "Segue a lista de m\u00f3dulos e servi\u00e7os de terceiros utilizados no projeto.", 
             "title": "APIs de terceiros"
         }, 
         {
             "location": "/tecnologies/#django", 
-            "text": "...", 
+            "text": "\"Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\"  https://www.djangoproject.com", 
             "title": "Django"
         }, 
         {
             "location": "/tecnologies/#django-environ", 
-            "text": "...", 
+            "text": "\"Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application.\"  https://django-environ.readthedocs.io", 
             "title": "Django-environ"
         }, 
         {
             "location": "/tecnologies/#requests", 
-            "text": "...", 
+            "text": "\"Requests is the only Non-GMO HTTP library for Python, safe for human consumption.\"  http://docs.python-requests.org", 
             "title": "Requests"
         }, 
         {
             "location": "/tecnologies/#beautifulsoup-4", 
-            "text": "...", 
+            "text": "\"Beautiful Soup is a Python library for pulling data out of HTML and XML files.\"  https://www.crummy.com/software/BeautifulSoup/bs4/doc/", 
             "title": "BeautifulSoup 4"
         }, 
         {
-            "location": "/tecnologies/#msgpack", 
-            "text": "...", 
-            "title": "Msgpack"
+            "location": "/tecnologies/#messagepack", 
+            "text": "\"MessagePack is an efficient binary serialization format.\"  https://msgpack.org", 
+            "title": "MessagePack"
         }, 
         {
             "location": "/tecnologies/#mkdocs", 
-            "text": "...", 
+            "text": "\"MkDocs is a fast, simple and downright gorgeous static site generator\nthat's geared towards building project documentation.\"  http://www.mkdocs.org", 
             "title": "MkDocs"
         }, 
         {
             "location": "/tecnologies/#gevent", 
-            "text": "...", 
+            "text": "\"gevent is a coroutine-based Python networking library that uses\ngreenlet to provide a high-level synchronous API on top of the libev event loop.\"  http://www.gevent.org/", 
             "title": "gevent"
         }, 
         {
             "location": "/tecnologies/#docker", 
-            "text": "...", 
+            "text": "\"Docker is an open platform for developers and sysadmins to build, ship, and run\ndistributed applications, whether on laptops, data center VMs, or the cloud.\"  https://www.docker.com/", 
             "title": "Docker"
         }, 
         {
             "location": "/tecnologies/#aws", 
-            "text": "...", 
+            "text": "\"AWS \u00e9 uma cole\u00e7\u00e3o de servi\u00e7os de computa\u00e7\u00e3o em nuvem ou servi\u00e7os\nweb, que formam uma plataforma de computa\u00e7\u00e3o na nuvem.\"  https://aws.amazon.com/pt/", 
             "title": "AWS"
         }, 
         {
             "location": "/tecnologies/#django-storages", 
-            "text": "...", 
-            "title": "Django-Storages"
+            "text": "\"django-storages is a collection of custom storage backends for Django.\"  https://django-storages.readthedocs.io", 
+            "title": "django-storages"
         }, 
         {
             "location": "/about/", 
