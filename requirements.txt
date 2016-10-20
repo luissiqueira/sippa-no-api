@@ -24,3 +24,5 @@ boto==2.42.0
 msgpack-python==0.4.8
 
 mkdocs==0.15.3
+
+django-ratelimit==1.0.1

@@ -4,9 +4,11 @@ from django.views.decorators.http import require_GET, require_POST
 
 from business.wrapper import SIPPAWrapper
 from django.http.response import JsonResponse, HttpResponse
+from ratelimit.decorators import ratelimit
 
 
 @require_GET
+@ratelimit(key='ip', rate='15/20m')
 def start_login(request):
     response = SIPPAWrapper().start_auth()
     response_format = request.GET.get('format', 'json')
@@ -15,6 +17,7 @@ def start_login(request):
 
 
 @require_POST
+@ratelimit(key='ip', rate='15/20m')
 def process_login(request):
     sippa = SIPPAWrapper()
 
