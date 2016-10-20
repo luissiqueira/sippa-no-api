@@ -24,3 +24,8 @@ atual onde a maioria das aplicações que conhecemos dão suporte a esse acesso 
 # Conhecendo a API
 
 Para mais detalhes sobre o uso da API [acesse aqui](/using/).
+
+# Como contribuir
+
+Caso tenha interesse em contribuir de alguma forma com a ferramenta basta abrir o próprio fork e enviar
+pull-requests através do GitHub ou apenas criar as issues com problemas ou melhorias desejadas.
