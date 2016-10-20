@@ -171,7 +171,7 @@ do [MessagePack](https://msgpack.org).
 
 Para isso é preciso apenas enviar um query parameter na URL chamado *format* com o valor *msgpack*.
 
-***Exemplo de requição requisitando MessagePack como padrão de resposta***
+***Exemplo de requisição requisitando MessagePack como padrão de resposta***
 
 ```http
   GET  http://sippa-no-api.us-east-1.elasticbeanstalk.com/api/start_login?format=msgpack
