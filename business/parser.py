@@ -140,9 +140,6 @@ class SubjectParser(object):
         name = self.__teacher_name
         email = soup.h2.text.split('-')[1].strip()
 
-        print name
-        print type(name)
-
         return {
             'name': name,
             'email': email.encode('utf-8'),
