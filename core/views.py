@@ -1,4 +1,5 @@
 import msgpack
+from django.views.decorators.csrf import csrf_exempt
 
 from django.views.decorators.http import require_GET, require_POST
 
@@ -18,6 +19,7 @@ def start_login(request):
 
 @require_POST
 @ratelimit(key='ip', rate='15/20m')
+@csrf_exempt
 def process_login(request):
     sippa = SIPPAWrapper()
 
