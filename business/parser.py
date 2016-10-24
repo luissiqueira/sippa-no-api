@@ -212,8 +212,8 @@ class ListSubjectsParser(object):
             subjects.append({
                 'code': code,
                 'class_identifier': class_identifier,
-                'name': name,
-                'teacher_name': teacher_name
+                'name': name.encode('utf-8'),
+                'teacher_name': teacher_name.encode('utf-8')
             })
 
         return subjects
