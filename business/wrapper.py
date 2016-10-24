@@ -195,22 +195,22 @@ class SIPPAWrapper(object):
                                            class_identifier=class_identifier, teacher_name=teacher_name)
 
             subject_request = requests.get(self.format_subject_url(class_identifier), cookies=cookies, verify=False)
-            subject_parser.home_content = subject_request.content.decode('utf-8', 'ignore')
+            subject_parser.home_content = subject_request.content
 
             subject_request = requests.get(SIPPAWrapper.FILES_URL, cookies=cookies, verify=False)
-            subject_parser.files_content = subject_request.content.decode('utf-8', 'ignore')
+            subject_parser.files_content = subject_request.content
 
             subject_request = requests.get(SIPPAWrapper.EXAMS_URL, cookies=cookies, verify=False)
-            subject_parser.exams_content = subject_request.content.decode('utf-8', 'ignore')
+            subject_parser.exams_content = subject_request.content
 
             subject_request = requests.get(SIPPAWrapper.HOMEWORK_URL, cookies=cookies, verify=False)
-            subject_parser.homework_content = subject_request.content.decode('utf-8', 'ignore')
+            subject_parser.homework_content = subject_request.content
 
             subject_request = requests.get(SIPPAWrapper.SECOND_CALL_URL, cookies=cookies, verify=False)
-            subject_parser.second_call_content = subject_request.content.decode('utf-8', 'ignore')
+            subject_parser.second_call_content = subject_request.content
 
             subject_request = requests.get(SIPPAWrapper.CALENDAR_URL, cookies=cookies, verify=False)
-            subject_parser.calendar_content = subject_request.content.decode('utf-8', 'ignore')
+            subject_parser.calendar_content = subject_request.content
 
             subjects_to_process.append(subject_parser)
 
@@ -243,22 +243,22 @@ class BlogWrapper(object):
         '''
 
         blog_request = requests.get(BlogWrapper.START_URL)
-        soup = BeautifulSoup(blog_request.content.decode('utf-8', 'ignore'), 'html.parser')
+        soup = BeautifulSoup(blog_request.content, 'html.parser')
 
         self.teachers = []
 
         for div in soup.find_all('div', class_='col-md-10'):
-            name = div.h2.text
-            position = div.p.text
+            name = div.h2.text.encode('utf-8')
+            position = div.p.text.encode('utf-8')
             url = div.a['href']
 
             teacher_request = requests.get(url)
             soup_teacher = BeautifulSoup(teacher_request.content, 'html.parser', from_encoding='utf-8')
 
             if soup_teacher.em is not None:
-                emails = soup_teacher.em.text
+                emails = soup_teacher.em.text.encode('utf-8')
             elif len(div.find_all('li')) > 0:
-                emails = div.find_all('li')[1].text
+                emails = div.find_all('li')[1].text.encode('utf-8')
             else:
                 emails = ''
 

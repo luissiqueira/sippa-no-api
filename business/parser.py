@@ -38,7 +38,7 @@ class SubjectParser(object):
 
     def find_teacher_avatar(self, name, email):
         teacher = Teacher.find_by_name_or_email(name=name, email=email)
-        return teacher.avatar_url if teacher is not None else self.default_avatar_url
+        return teacher.avatar_url.encode('utf-8') if teacher is not None else self.default_avatar_url
 
     def get_notices(self):
         soup = BeautifulSoup(self.home_content, 'html.parser', from_encoding='utf-8')
@@ -68,9 +68,9 @@ class SubjectParser(object):
 
             lessons.append({
                 'lesson': int(lesson),
-                'date': date,
-                'planned_description': planned_description,
-                'description': description,
+                'date': date.encode('utf-8'),
+                'planned_description': planned_description.encode('utf-8'),
+                'description': description.encode('utf-8'),
                 'presence_hours': int(presence_hours) if len(presence_hours) > 0 else 0
             })
 
@@ -88,7 +88,7 @@ class SubjectParser(object):
         max_hours = len(soup.tbody.find_all('tr')) * 2
 
         return {
-            'text': text,
+            'text': text.encode('utf-8'),
             'presence_hours': int(presence_re.group(0)) if presence_re is not None else None,
             'absence_hours': int(absence_re.group(0)) if absence_re is not None else None,
             'max_hours': max_hours
@@ -104,7 +104,7 @@ class SubjectParser(object):
                 weight_re = re.search('\d+\.\d+', text)
                 exams.append({
                     'order': idx,
-                    'short_description': text.split('(')[0],
+                    'short_description': text.split('(')[0].encode('utf-8'),
                     'weight': weight_re.group(0) if weight_re is not None else 1
                 })
 
@@ -112,10 +112,10 @@ class SubjectParser(object):
             if idx == 0 or len(exams) < idx:
                 continue
 
-            exams[idx - 1]['value'] = value.text if len(value.text) > 0 else None
+            exams[idx - 1]['value'] = value.text.encode('utf-8') if len(value.text) > 0 else None
 
         for idx, description in enumerate(soup.form.find_all_next('p')[1::2]):
-            exams[idx]['description'] = description.text
+            exams[idx]['description'] = description.text.encode('utf-8')
 
         return exams
 
@@ -132,7 +132,7 @@ class SubjectParser(object):
         soup = BeautifulSoup(self.exams_content, 'html.parser', from_encoding='utf-8')
         values = soup.tbody.find_all('td')
 
-        return values[::-1][0].text
+        return values[::-1][0].text.encode('utf-8')
 
     def get_teacher(self):
         soup = BeautifulSoup(self.home_content, 'html.parser', from_encoding='utf-8')
@@ -141,8 +141,8 @@ class SubjectParser(object):
         email = soup.h2.text.split('-')[1].strip()
 
         return {
-            'name': name,
-            'email': email,
+            'name': name.encode('utf-8'),
+            'email': email.encode('utf-8'),
             'avatar_url': self.find_teacher_avatar(name=name, email=email)
         }
 
