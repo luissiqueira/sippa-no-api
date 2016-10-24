@@ -41,7 +41,7 @@ class SubjectParser(object):
         return teacher.avatar_url if teacher is not None else self.default_avatar_url
 
     def get_notices(self):
-        soup = BeautifulSoup(self.home_content, 'html.parser')
+        soup = BeautifulSoup(self.home_content, 'html.parser', from_encoding='utf-8')
         notices = []
 
         for idx, notice in enumerate(soup.find_all(class_='tabela-coluna0')):
@@ -53,7 +53,7 @@ class SubjectParser(object):
         return notices
 
     def get_lesson_plans(self):
-        soup = BeautifulSoup(self.home_content, 'html.parser')
+        soup = BeautifulSoup(self.home_content, 'html.parser', from_encoding='utf-8')
         tbody = soup.find(class_='tabela_ver_freq').tbody
 
         lessons = []
@@ -77,7 +77,7 @@ class SubjectParser(object):
         return lessons
 
     def get_frequency(self):
-        soup = BeautifulSoup(self.home_content, 'html.parser')
+        soup = BeautifulSoup(self.home_content, 'html.parser', from_encoding='utf-8')
         el = soup.h3
 
         text = el.text.strip()
@@ -95,7 +95,7 @@ class SubjectParser(object):
         }
 
     def get_exams(self):
-        soup = BeautifulSoup(self.exams_content, 'html.parser')
+        soup = BeautifulSoup(self.exams_content, 'html.parser', from_encoding='utf-8')
         exams = []
 
         for idx, exam in enumerate(soup.thead.find_all('th')):
@@ -129,13 +129,13 @@ class SubjectParser(object):
         return self.__name
 
     def get_average(self):
-        soup = BeautifulSoup(self.exams_content, 'html.parser')
+        soup = BeautifulSoup(self.exams_content, 'html.parser', from_encoding='utf-8')
         values = soup.tbody.find_all('td')
 
         return values[::-1][0].text
 
     def get_teacher(self):
-        soup = BeautifulSoup(self.home_content, 'html.parser')
+        soup = BeautifulSoup(self.home_content, 'html.parser', from_encoding='utf-8')
 
         name = self.__teacher_name
         email = soup.h2.text.split('-')[1].strip()
@@ -195,7 +195,7 @@ class ListSubjectsParser(object):
             "teacher_name": "Professor"
         }
         '''
-        soup = BeautifulSoup(self.__content, 'html.parser')
+        soup = BeautifulSoup(self.__content, 'html.parser', from_encoding='utf-8')
 
         tbody = soup.find(class_='tabela_ver_freq').tbody
 
