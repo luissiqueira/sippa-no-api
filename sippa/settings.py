@@ -154,3 +154,12 @@ MEDIA_URL = '%s/%s/' % (BASE_AWS_URL, MEDIAFILES_LOCATION)
 ADMIN_SITE_HEADER = 'SIPPA'
 
 CORS_URLS_REGEX = r'^.*$'
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
