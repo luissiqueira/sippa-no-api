@@ -4,7 +4,7 @@ Exibir quais são os serviços disponíveis, falar sobre o msgpack e json, exemp
 
 ## Entendendo o processo de login
 
-Para realizar login no [SIPPA](https://sistemas.quixada.ufc.br/apps/sippa/)
+Para realizar login no [SIPPA](https://sistemas.quixada.ufc.br/sippa/)
 é necessário informar quatro campos básicos:
 
 - Matrícula
